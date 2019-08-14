@@ -183,20 +183,20 @@ public class AnswerDAO {
 		return a;
 	}
 
-	public int cancelSelectionAnswer(Connection con, String a_no) {
-		int result=0;
-		Statement st=null;
-		String sql="delete from answer_select where a_no="+a_no;
-		try {
-			st=con.createStatement();
-			result=st.executeUpdate(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			//close(st);
-		}
-		return result;
-	}
+// 	public int cancelSelectionAnswer(Connection con, String a_no) {
+// 		int result=0;
+// 		Statement st=null;
+// 		String sql="delete from answer_select where a_no="+a_no;
+// 		try {
+// 			st=con.createStatement();
+// 			result=st.executeUpdate(sql);
+// 		} catch (SQLException e) {
+// 			e.printStackTrace();
+// 		} finally {
+// 			//close(st);
+// 		}
+// 		return result;
+// 	}
 
 	public int updateAnswer(Connection con, AnswerVO a) {
 		int result=0;
@@ -328,6 +328,22 @@ public class AnswerDAO {
 			//close(stmt);
 		}
 		return a;
+	}
+	
+	public int setAnswerSelected(Connection con, String a_no) {
+		int result=0;
+		PreparedStatement pst=null;
+		String sql="update answer set selected='Y' where a_no="+a_no;
+		try {
+			pst=con.prepareStatement(sql);
+			result=pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//close(rs);
+			//close(stmt);
+		}
+		return result;
 	}
 
 }
