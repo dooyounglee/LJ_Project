@@ -63,33 +63,5 @@ ${mem}
 	</c:forEach>
 	</div>
 </div>
-<%-- <table border=1>
-	<tr>
-		<td>q_no</td>
-		<td>writer</td>
-		<td>title</td>
-		<td>content</td>
-		<td>cate1</td>
-		<td>cate2</td>
-		<td>cate3</td>
-		<td>count</td>
-		<td>reg</td>
-		<td>update</td>
-	</tr>
-	<c:forEach var="q" items="${qlist}">
-	<tr>
-		<td><c:out value="${q.q_no }" /></td>
-		<td><c:out value="${q.writer }" /></td>
-		<td><a href="read.qu?q_no=<c:out value="${q.q_no }" />"><c:out value="${q.title }" /></a></td>
-		<td><c:out value="${q.content }" /></td>
-		<td><c:out value="${q.cate1 }" /></td>
-		<td><c:out value="${q.cate2 }" /></td>
-		<td><c:out value="${q.cate3 }" /></td>
-		<td><c:out value="${q.count }" /></td>
-		<td><c:out value="${q.reg_date }" /></td>
-		<td><c:out value="${q.update_date }" /></td>
-	</tr>
-	</c:forEach>
-</table> --%>
 </body>
 </html>
