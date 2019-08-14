@@ -73,12 +73,13 @@ public class AnswerController extends HttpServlet {
 			forward = new ActionForward();
 			String a_no=request.getParameter("a_no");
 			System.out.println(a_no);
-			Answer_selectVO a=new AnswerService().getAnswerSelection(a_no);
-			if(a==null) {
+			int result=new AnswerService().getAnswerSelection(a_no);
+			return;
+			/*if(a==null) {
 				int result=new AnswerService().selectionAnswer(a_no);
 				PrintWriter out= response.getWriter();
 				out.print("add");
-			}/*else {
+			}else {
 				int result=new AnswerService().cancelSelectionAnswer(a_no);
 				PrintWriter out= response.getWriter();
 				out.print("remove");
