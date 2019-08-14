@@ -145,7 +145,7 @@ public class AnswerDAO {
 		PreparedStatement pst=null;
 		String sql=null;
 		if(oracle) {
-			sql="insert into answer_select values(seq_selection.nextval,?,sysdate)";
+			sql="insert into answer_select values(seq_answer_select.nextval,?,sysdate)";
 		}else {
 			sql="insert into answer_select(a_no,reg_date) values(?,sysdate())";
 		}
