@@ -77,9 +77,18 @@ public class AnswerService {
 		return result;
 	}
 
-	public Answer_selectVO getAnswerSelection(String a_no) {
+	public int getAnswerSelection(String a_no) {
 		Connection con=getconnection();
-		Answer_selectVO result=ad.getAnswerSelection(con,a_no);
+		int result=0;
+		int result1=ad.setAnswerSelected(con,a_no);
+		AnswerVO ans=ad.getAnswer(con,a_no);
+		int result2=qd.setAnswerSelected(con,ans.getQ_no());
+		if(result1>0 && result2>0) {
+			commit(con);
+			result=1;
+		}else {
+			rollback(con);
+		}
 		close(con);
 		return result;
 	}
