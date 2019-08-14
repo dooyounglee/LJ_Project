@@ -62,7 +62,7 @@ public class QuestionDAO {
 						rs.getInt(8),
 						rs.getDate(9),
 						rs.getDate(10),
-						rs.getInt(12)));
+						rs.getInt(13)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
