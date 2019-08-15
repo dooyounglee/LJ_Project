@@ -16,8 +16,17 @@ public class QuestionVO {
    private Date update_date;
    private int answerCount;
    private int replyCount;
+   private String selected;
    
-   public QuestionVO() {
+   public String getSelected() {
+	return selected;
+}
+
+public void setSelected(String selected) {
+	this.selected = selected;
+}
+
+public QuestionVO() {
       super();
    }
 
@@ -169,7 +178,8 @@ public void setReplyCount(int replyCount) {
 public String toString() {
 	return "QuestionVO [q_no=" + q_no + ", writer=" + writer + ", title=" + title + ", content=" + content + ", cate1="
 			+ cate1 + ", cate2=" + cate2 + ", cate3=" + cate3 + ", count=" + count + ", reg_date=" + reg_date
-			+ ", update_date=" + update_date + ", answerCount=" + answerCount + ", replyCount=" + replyCount + "]";
+			+ ", update_date=" + update_date + ", answerCount=" + answerCount + ", replyCount=" + replyCount
+			+ ", selected=" + selected + "]";
 }
 
    
