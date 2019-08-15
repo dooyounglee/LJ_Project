@@ -11,7 +11,7 @@ import com.lj.question.vo.QuestionVO;
 
 public class QuestionDAO {
 
-	private boolean oracle=false;
+	private boolean oracle=true;
 	
 	public int inputQuestion(Connection con, QuestionVO q) {
 		int result=0;
