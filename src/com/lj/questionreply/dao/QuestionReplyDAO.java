@@ -11,7 +11,7 @@ import com.lj.questionreply.vo.QuestionReplyVO;
 
 public class QuestionReplyDAO {
 
-	private boolean oracle=false;
+	private boolean oracle=true;
 	
 	public ArrayList<QuestionReplyVO> getList(Connection con, int q_no) {
 		ArrayList<QuestionReplyVO> list=new ArrayList<>();
