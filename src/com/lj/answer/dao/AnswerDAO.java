@@ -14,7 +14,7 @@ import com.lj.member.vo.MemberVO;
 
 public class AnswerDAO {
 
-	private boolean oracle=true;
+	private boolean oracle=false;
 	
 	public int getAnswerCount(Connection con,String q_no) {
 		int result=0;
@@ -76,15 +76,17 @@ public class AnswerDAO {
 			stmt=con.createStatement();
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
-				list.add(new AnswerVO(rs.getInt(1),
+				AnswerVO a=new AnswerVO(rs.getInt(1),
 						rs.getInt(2),
 						rs.getString(3),
 						rs.getString(4),
 						rs.getDate(5),
-						rs.getDate(6),
-						rs.getInt(8),
-						rs.getString(10),
-						rs.getInt(12)));
+						rs.getDate(6));
+				a.setSelected(rs.getString(7));
+				a.setLikeCount(rs.getInt(9));
+				a.setWhoLiked(rs.getString(11));
+				a.setReplyCount(rs.getInt(13));
+				list.add(a);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -234,9 +236,9 @@ public class AnswerDAO {
 						rs.getString(3),
 						rs.getString(4),
 						rs.getDate(5),
-						rs.getDate(6),
+						rs.getDate(6)/*,
 						rs.getInt(7),
-						rs.getString(8));
+						rs.getString(8)*/);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

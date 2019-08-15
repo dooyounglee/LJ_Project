@@ -13,10 +13,12 @@ import com.lj.answer.vo.AnswerVO;
 import com.lj.answer.vo.Answer_likeVO;
 import com.lj.answer.vo.Answer_selectVO;
 import com.lj.member.vo.MemberVO;
+import com.lj.question.dao.QuestionDAO;
 
 public class AnswerService {
 
 	private AnswerDAO ad=new AnswerDAO();
+	private QuestionDAO qd=new QuestionDAO();  
 
 	public int getAnswerCount(String q_no) {
 		Connection con=getconnection();
@@ -93,7 +95,7 @@ public class AnswerService {
 		return result;
 	}
 
-	public int cancelSelectionAnswer(String a_no) {
+/*	public int cancelSelectionAnswer(String a_no) {
 		Connection con=getconnection();
 		int result=ad.cancelSelectionAnswer(con,a_no);
 		if(result>0) {
@@ -103,7 +105,7 @@ public class AnswerService {
 		}
 		close(con);
 		return result;
-	}
+	}*/
 
 	public int updateAnswer(AnswerVO a) {
 		Connection con=getconnection();

@@ -52,7 +52,7 @@ public class QuestionDAO {
 			stmt=con.createStatement();
 			rs=stmt.executeQuery(sql);
 			while(rs.next()) {
-				list.add(new QuestionVO(rs.getInt(1),
+				QuestionVO q=new QuestionVO(rs.getInt(1),
 						rs.getString(2),
 						rs.getString(3),
 						rs.getString(4),
@@ -62,7 +62,9 @@ public class QuestionDAO {
 						rs.getInt(8),
 						rs.getDate(9),
 						rs.getDate(10),
-						rs.getInt(13)));
+						rs.getString(11));
+				q.setAnswerCount(rs.getInt(13));
+				list.add(q);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -91,7 +93,8 @@ public class QuestionDAO {
 						rs.getString(7),
 						rs.getInt(8),
 						rs.getDate(9),
-						rs.getDate(10));
+						rs.getDate(10),
+						rs.getString(11));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -157,6 +160,23 @@ public class QuestionDAO {
 			e.printStackTrace();
 		} finally {
 			//close(pstmt);
+		}
+		return result;
+	}
+
+	public int setAnswerSelected(Connection con, int q_no) {
+		int result=0;
+		PreparedStatement pst=null;
+		String sql="update question set selected='Y' where q_no=?";
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, q_no);
+			result=pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//close(rs);
+			//close(stmt);
 		}
 		return result;
 	}

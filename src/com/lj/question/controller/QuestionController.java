@@ -81,13 +81,9 @@ public class QuestionController extends HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 		HttpSession session=null;
-
-		session = request.getSession();
-		System.out.println("새로운거니?: "+session.isNew()+new Date());
-		System.out.println("세션 시작: "+new Date());
-		System.out.println("세션 시간조정 5초"+new Date());
-		System.out.println(session.getId()+new Date());
-		System.out.println(""+session.getMaxInactiveInterval()+new Date());
+		
+		session=request.getSession();
+		System.out.println(session.getMaxInactiveInterval());
 		
 		if (command.equals("/list.qu")) {
 			request.setAttribute("qlist", new QuestionService().getList());
