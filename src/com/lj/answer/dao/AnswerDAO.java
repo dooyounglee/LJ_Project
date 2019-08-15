@@ -14,7 +14,7 @@ import com.lj.member.vo.MemberVO;
 
 public class AnswerDAO {
 
-	private boolean oracle=false;
+	private boolean oracle=true;
 	
 	public int getAnswerCount(Connection con,String q_no) {
 		int result=0;
