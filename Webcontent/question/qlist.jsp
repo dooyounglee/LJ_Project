@@ -45,7 +45,16 @@ ${mem}
 	<h1>오늘 올라온 질문들</h1>
 	<c:forEach var="q" items="${qlist }">
 		<li><a href="read.qu?q_no=<c:out value="${q.q_no }" />">
-			<h2><b><c:out value="${q.title }" /></b></h2><br>
+			<h2><b><c:out value="${q.title }" /></b></h2>
+			<c:choose>
+				<c:when test="${q.selected eq 'Y' }" >
+					채택
+				</c:when>
+				<c:otherwise>
+					노채택
+				</c:otherwise>
+			</c:choose>
+			<br>
 			<c:choose>
 				<c:when test="${q.content.length()>20 }" >
 					<c:out value="${q.content.substring(0,20) }" />.......

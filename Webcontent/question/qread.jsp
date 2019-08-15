@@ -40,7 +40,7 @@ function reg_ans(){
 			console.log(a);
 			var str="";
 			str+='<li data-a_no="'+a.a_no+'" ><div>'
-			if($('#login_ig').val()==a.writer){
+			if($('#login_id').val()==a.writer){
 				str+='<button class="selection" >채택</button><br>'
 			}
 			str+='<b>'+a.writer+'</b><br>'
@@ -80,6 +80,14 @@ function reg_question_reply(){
 			str+='<button class="btn del_question_reply">삭제</button></li>'
 			$('.question_reply_body').append(str)
 			$('#question_reply_content').val("")
+			
+			var this_reply_label=$('.close-questionreply')
+			if(this_reply_label.text()=='댓글쓰기'){
+				this_reply_label.text('댓글1')
+			}else{
+				var count=parseInt(this_reply_label.text().replace('댓글',''))
+				this_reply_label.text('댓글'+(count+1))
+			}
 		}
 	});
 }
@@ -92,7 +100,11 @@ ${mem}
 <div id=question style="background-color:white">
 	<div id=question_body style="width:800px;margin:auto;padding-bottom:50px;">
 		<%-- <label>q_no:</label>${q.q_no}<br> --%>
-		<h1>${q.title}</h1>
+		<h1>${q.title}
+			<c:if test="${q.selected eq 'Y' }">
+				<font style="color:red;font-size:20px;" bold>채택</font>
+			</c:if>
+		</h1>
 		<b>작성자 : ${q.writer}</b><span style="float:right">조회수 : ${q.count}</span><br>
 		<hr>
 		<h4>${q.content}</h4><br><br>
@@ -145,6 +157,7 @@ ${mem}
 $(document).on('click','.del_question_reply',function(){
 	var this_li=$(this).closest('li')
 	var rq_no=this_li.data('rq_no')
+	var this_reply_label=$('.close-questionreply')
   	$.ajax({
 		url:'delete.qur',
 		async:false,
@@ -154,13 +167,19 @@ $(document).on('click','.del_question_reply',function(){
 		},
 		success: function(data) {
 			this_li.remove();
+			if(this_reply_label.text()=='댓글1'){
+				this_reply_label.text('댓글쓰기')
+			}else{
+				var count=parseInt(this_reply_label.text().replace('댓글',''));
+				this_reply_label.text('댓글'+(count-1))
+			}
 		},
 	});
 })
 </script>
 <div id=answer style="background-color:#EEE;padding-top:20px;">
-	<c:if test="${isSelected eq null }">
-		<c:if test="${mem!=null }">
+	<c:if test="${q.selected eq 'N' }">
+		<c:if test="${mem!=null}">
 			<div id="answer_write_form" style="width:800px;margin:auto;">
 <%-- 				<label>지금 로그인한 id:</label><input type=text name=writer value="${mem.id}" readonly /><br>
 				<label>q_no:</label>${q.q_no}<br>
@@ -182,16 +201,14 @@ $(document).on('click','.del_question_reply',function(){
 				<%-- (<c:out value="${a.a_no }" />
 				<c:out value="${a.q_no }" />) --%>
 					<c:choose>
-						<c:when test="${isSelected eq null }">
-							<c:if test="${q.writer eq mem.id }">
+						<c:when test="${a.selected eq 'N' }">
+							<c:if test="${q.selected eq 'N' && q.writer eq mem.id }">
 								<button class="selection" style="">채택</button><br>
 							</c:if>
 						</c:when>
-						<c:when test="${isSelected != null }">
-							<c:if test="${isSelected.a_no eq a.a_no }">
-								<img src="img/medal-icon.png" style="width:50px;"><br>
-							</c:if>
-						</c:when>
+						<c:otherwise>
+							<img src="img/medal-icon.png" style="width:50px;"><br>
+						</c:otherwise>
 					</c:choose>
 				<b><c:out value="${a.writer }" /></b><br>
 				<span class="content"><c:out value="${a.content }" /></span><br>
@@ -200,7 +217,7 @@ $(document).on('click','.del_question_reply',function(){
  				<%-- <fmt:parseDate value="2016-12-24 09:03:23" pattern="yyyy.MM.dd hh:mm:ss" var="date" />${data }<br> --%>
 				<c:if test="${mem.id eq a.writer }" >
 					<c:choose>
-						<c:when test="${isSelected eq null }">
+						<c:when test="${q.selected eq 'N' }">
 							<!-- <button class="update_ans" >수정</button> -->
 							<img src="img/pencil.png" class="update_ans" style="width:25px">
 						</c:when>
@@ -409,7 +426,7 @@ $(document).on('click','.selection',function(){
 		//dataType:'json',
 		//dataType:'charset=utf8;',
 		success: function(data) {
-			if(data=="add"){
+//			if(data=="add"){
 				$('.selection').hide();
 				$('.update_ans').remove();
 				$('#answer_write_form').hide();
@@ -417,10 +434,10 @@ $(document).on('click','.selection',function(){
 				this_div.prepend('<img src="img/medal-icon.png" style="width:50px;"><br>')
 				//this_btn.show();
 				//this_btn.text("채택★");
-			}/* else if(data=="remove"){
-				this_btn.text("채택");
-				$('.selection').show();
-			} */
+//			} else if(data=="remove"){
+//				this_btn.text("채택");
+//				$('.selection').show();
+//			}
 		},
 	});
 })
