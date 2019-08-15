@@ -13,9 +13,18 @@ public class AnswerVO {
    private int likeCount;
    private String whoLiked;
    private int replyCount;
+   private String selected;
    
    
-   public AnswerVO() {
+   public String getSelected() {
+	return selected;
+}
+
+public void setSelected(String selected) {
+	this.selected = selected;
+}
+
+public AnswerVO() {
       super();
    }
 
@@ -146,7 +155,7 @@ public int getA_no() {
 	public String toString() {
 		return "AnswerVO [a_no=" + a_no + ", q_no=" + q_no + ", writer=" + writer + ", content=" + content
 				+ ", reg_date=" + reg_date + ", update_date=" + update_date + ", likeCount=" + likeCount + ", whoLiked="
-				+ whoLiked + ", replyCount=" + replyCount + "]";
+				+ whoLiked + ", replyCount=" + replyCount + ", selected=" + selected + "]";
 	}
 
 
