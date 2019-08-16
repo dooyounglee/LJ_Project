@@ -11,7 +11,7 @@ import com.lj.answerreply.vo.AnswerReplyVO;
 
 public class VisitDAO {
 
-	private boolean oracle=false;
+	private boolean oracle=true;
 	
 	public int visit(Connection con) {
 		int result=0;
